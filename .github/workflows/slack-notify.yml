@@ -14,5 +14,5 @@ jobs:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
-            channel: ${{ github.event.channel }}
+            channel: ${{ github.event.client_payload.channel }}
             text: "✅ TEST 🆗 \n\n *GitHub 알림*\n*내용:* ${{ github.event.client_payload.message }}\n*발송자:* ${{ github.event.client_payload.sender }}"
