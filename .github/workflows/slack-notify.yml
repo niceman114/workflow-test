@@ -8,23 +8,11 @@ jobs:
   notify:
     runs-on: ubuntu-latest
     steps:
-      - name: Send Slack Message
-        uses: slackapi/slack-github-action@v1.24.0
-        with:
-          channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
-          # 웹훅 호출 시 보낸 client_payload 데이터를 메시지에 활용
-          payload: |
-            {
-              "text": "🚀 *GitHub 알림*\n*내용:* ${{ github.event.client_payload.message }}\n*발송자:* ${{ github.event.client_payload.sender }}"
-            }
-        env:
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-
       - name: Post text to a Slack channel
         uses: slackapi/slack-github-action@v3.0.1
         with:
           method: chat.postMessage
           token: ${{ secrets.SLACK_BOT_TOKEN }}
           payload: |
-            channel: ${{ github.event.client_payload.channel }}
-            text: "✅ TEST <!channel> 🆗 \n\n *GitHub 알림*\n*내용:* ${{ github.event.client_payload.message }}\n*발송자:* ${{ github.event.client_payload.sender }}"
+            channel: ${{ github.event.channel }}
+            text: "✅ TEST 🆗 \n\n *GitHub 알림*\n*내용:* ${{ github.event.client_payload.message }}\n*발송자:* ${{ github.event.client_payload.sender }}"
