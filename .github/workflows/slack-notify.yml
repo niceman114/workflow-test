@@ -11,10 +11,10 @@ jobs:
       - name: Send Slack Message
         uses: slackapi/slack-github-action@v1.24.0
         with:
+          channel-id: "${{ secrets.SLACK_CHANNEL_ID }}"
           # 웹훅 호출 시 보낸 client_payload 데이터를 메시지에 활용
           payload: |
             {
-              "channel": "${{ secrets.SLACK_CHANNEL_ID }}",
               "text": "🚀 *GitHub 알림*\n*내용:* ${{ github.event.client_payload.message }}\n*발송자:* ${{ github.event.client_payload.sender }}"
             }
         env:
